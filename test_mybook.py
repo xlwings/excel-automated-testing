@@ -40,10 +40,10 @@ class TestMyBook(unittest.TestCase):
         os.remove('mybook.pdf')
 
     def test_cell_logic(self):
-        table = self.wb.sheets[0].range('A1').expand()
-        for col in range(1, table.columns.count):
-            sum_inputs = table.value[1][col] + table.value[2][col]
-            total_row = table.value[3][col]
+        values = self.wb.sheets[0].range('A1').expand().value
+        for col in range(1, len(values[0])):
+            sum_inputs = values[1][col] + values[2][col]
+            total_row = values[3][col]
             self.assertAlmostEqual(total_row, sum_inputs)
 
     def test_vba_alternative_implementation(self):
